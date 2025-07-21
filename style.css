@@ -406,7 +406,7 @@ body {
   .container-quem-somos {
     display: flex;
     background-color: #fff;
-    padding: 3% 15% 5% 15%;
+    padding: 5% 15% 5% 15%;
     align-items: center;
   }
 
@@ -624,4 +624,12 @@ body {
   display: flex;
   margin: 100px 15% 40px 15%;
   gap: 220px;
+}
+
+.tiktok-rodape,
+.facebook-rodape,
+.instagram-rodape {
+  color: #9B0305;
+  font-size: 35px;
+  margin-top: 15px;
 }
