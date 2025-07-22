@@ -41,8 +41,39 @@ document.getElementById("logo").addEventListener("click", function() {
 
 })
 
+document.addEventListener('DOMContentLoaded', function () {
+    const imagens = document.querySelectorAll('.galeria img');
+    const popup = document.getElementById('popup');
+    const imagemPopup = document.getElementById('imagemPopup');
+    const descricaoPopup = document.getElementById('descricaoPopup');
+    const fecharBtn = document.getElementById('fechar');
+
+    imagens.forEach(img => {
+      img.addEventListener('click', function () {
+        imagemPopup.src = this.src;
+        descricaoPopup.textContent = this.getAttribute('data-desc');
+        popup.style.display = 'flex';
+      });
+    });
+
+    fecharBtn.addEventListener('click', function () {
+      popup.style.display = 'none';
+    });
+
+    // Fecha ao clicar fora da imagem
+    popup.addEventListener('click', function (e) {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+  });
 
 
+
+
+
+
+// Script para o menu do WhatsApp
 document.addEventListener('DOMContentLoaded', function () {
       const toggle = document.getElementById('whatsappToggle');
       const menu = document.getElementById('whatsappMenu');
@@ -58,5 +89,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
