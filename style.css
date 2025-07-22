@@ -486,6 +486,7 @@ body {
     color: inherit;
   }
 
+
  .container-texto-final {
     display: flex;
     gap: 50px;
@@ -632,6 +633,13 @@ body {
   color: #9B0305;
   font-size: 35px;
   margin-top: 15px;
+}
+
+.tiktok-rodape:hover,
+.facebook-rodape:hover,
+.instagram-rodape:hover {
+  color: #000000;
+  transition: color 0.3s ease;
 }
 
 .container-garantia {
