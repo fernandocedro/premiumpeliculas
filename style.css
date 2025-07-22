@@ -633,3 +633,17 @@ body {
   font-size: 35px;
   margin-top: 15px;
 }
+
+.container-garantia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 15%;
+    background-color: #fff;
+}
+
+.selo {
+    width: 20%;
+    height: auto;
+    margin-right: 50px;
+}
