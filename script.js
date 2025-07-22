@@ -41,28 +41,22 @@ document.getElementById("logo").addEventListener("click", function() {
 
 })
 
-const imagens = document.querySelectorAll('.galeria img');
-  const popup = document.getElementById('popup');
-  const imagemPopup = document.getElementById('imagemPopup');
-  const descricaoPopup = document.getElementById('descricaoPopup');
-  const fechar = document.getElementById('fechar');
 
-  imagens.forEach(img => {
-    img.addEventListener('click', () => {
-      imagemPopup.src = img.src;
-      imagemPopup.alt = img.alt;
-      descricaoPopup.textContent = img.dataset.desc;
-      popup.style.display = 'flex';
+
+document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById('whatsappToggle');
+      const menu = document.getElementById('whatsappMenu');
+
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+      });
+
+      window.addEventListener('click', function (e) {
+        if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+          menu.style.display = 'none';
+        }
+      });
     });
-  });
 
-  fechar.addEventListener('click', () => {
-    popup.style.display = 'none';
-  });
 
-  // Opcional: fechar ao clicar fora da imagem
-  popup.addEventListener('click', e => {
-    if (e.target === popup) {
-      popup.style.display = 'none';
-    }
-  });

@@ -265,6 +265,26 @@
     </div>
 </section>
 
+ <div class="whatsapp-container">
+    <button class="whatsapp-button" id="whatsappToggle">
+      <i class="fab fa-whatsapp" id="whatsappIcon"></i>
+    </button>
+    <div class="whatsapp-menu" id="whatsappMenu">
+      <a href="https://wa.me/5511999999999?text=Olá,%20quero%20falar%20com%20Vendas" target="_blank">
+        <i class="fab fa-whatsapp"></i> Película Automotiva
+      </a>
+      <a href="https://wa.me/5511988888888?text=Olá,%20preciso%20de%20Suporte" target="_blank">
+        <i class="fab fa-whatsapp"></i> Película Arquitetônica
+      </a>
+      <a href="https://wa.me/5511977777777?text=Olá,%20tenho%20uma%20dúvida%20financeira" target="_blank">
+        <i class="fab fa-whatsapp"></i> Restauraçao de Couro
+      </a>
+      <a href="https://wa.me/5511966666666?text=Olá,%20gostaria%20de%20falar%20com%20o%20RH" target="_blank">
+        <i class="fab fa-whatsapp"></i> PPF - Paint Protection
+      </a>
+    </div>
+  </div>
+
 
 
 
@@ -274,8 +294,43 @@
        <span> Desenvolvido por <a href="https://www.fernandocedro.com.br" class="autor" target="_blank">Fernando Cedro</a> &copy; 2023 </span>
     </div>   
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
-    
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+      const toggleBtn = document.getElementById('whatsappToggle');
+      const icon = document.getElementById('whatsappIcon');
+      const menu = document.getElementById('whatsappMenu');
+
+      toggleBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleBtn.classList.toggle('rotated');
+        const isOpen = menu.style.display === 'flex';
+        menu.style.display = isOpen ? 'none' : 'flex';
+
+        // Alterna o ícone
+        if (icon.classList.contains('fa-whatsapp')) {
+          icon.classList.remove('fa-whatsapp');
+          icon.classList.add('fa-x');
+        } else {
+          icon.classList.remove('fa-x');
+          icon.classList.add('fa-whatsapp');
+        }
+      });
+
+      window.addEventListener('click', function (e) {
+        if (!toggleBtn.contains(e.target) && !menu.contains(e.target)) {
+          menu.style.display = 'none';
+          toggleBtn.classList.remove('rotated');
+          icon.classList.remove('fa-x');
+          icon.classList.add('fa-whatsapp');
+        }
+      });
+    });
+
+</script>
 </body>
 </html>
