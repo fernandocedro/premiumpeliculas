@@ -769,3 +769,16 @@ body {
     border: 2px solid transparent;
     cursor: pointer;
 }
+
+.saiba-mais-card {
+  background-color: #9B0305;
+  color: white;
+}
+
+.faleConosco-card {
+
+  background-color: #ffffff;
+  color: #9B0305;
+
+
+}
