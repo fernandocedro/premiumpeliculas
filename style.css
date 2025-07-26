@@ -725,4 +725,47 @@ body {
       font-size: 25px;
     }
 
+
+    .container-linha-automotiva {
+        padding: 50px 15%;
+        background-color: #fff;
+
+    }
     
+    .container-linha-automotiva-texto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.card-linha-automotiva {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 250px;
+    max-width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.card-linha-automotiva-icons {
+    flex-grow: 1;
+}
+
+.btn-card-linha-automotiva {
+    margin-top: auto;
+    background-color: #9B0305;
+    color: white;
+    padding: 15px 10px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
