@@ -178,7 +178,7 @@ body {
   .cards-index {
     display: flex;
     justify-content: space-between;
-    margin: 0 15% 0 15%;
+    margin: 0 20% 0 20%;
     gap: 20px;
   }
 
@@ -391,11 +391,11 @@ body {
   }
 
   .select-dealer {
-    width: 20%;
-    height: 100%;
-    object-fit: cover;
-    margin-right: 20%;
-    padding: 30px 0;
+      width: 20%;
+      height: 100%;
+      object-fit: cover;
+      margin-right: 20%;
+      padding: 30px 0;
   }
 
 
@@ -818,6 +818,9 @@ body {
 }
 
 /* menu hamburguer */
+
+
+
 .menu-lista {
   display: none;
   flex-direction: column;
@@ -866,6 +869,13 @@ body {
 
 
 @media (max-width: 1032px) {
+.cards-index {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 30px 0 30px;
+        gap: 20px;
+    }
+
      .container-contato-pg {
      display: flex;
      flex-direction: column;
@@ -889,7 +899,7 @@ body {
     .cards-index {
         display: flex;
         justify-content: space-between;
-        margin: 0 0 0 0;
+        margin: 0 20px 0 20px;
         gap: 20px;
     }
     .slide-content {
@@ -905,7 +915,7 @@ body {
     .cards-index {
         display: flex;
         justify-content: space-between;
-        margin: 0 0 0 0;
+        margin: 0 30px 0 30px;
         gap: 1px;
     }
     .card {
@@ -918,6 +928,12 @@ body {
     transition: transform 0.3s ease;
     color: white;
 }
+    .cards-index {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 20px 0 20px;
+        gap: 1px;
+    }
 }
 
 @media (max-width: 782px) {
@@ -936,9 +952,12 @@ body {
         font-size: 18px;
     }
     .cards-index {
-        flex-direction: column;
-        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 50px 0 50px;
+        gap: 1px;
     }
+
     .card {
         width: 100%;
         margin-bottom: 20px;
@@ -991,6 +1010,11 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
     border: 2px solid transparent;
 }
+    .cards-index {
+        flex-direction: column;
+        align-items: center;
+        margin: 0 15px 0 15px;
+    }
 }
 
 @media (max-width: 661px) {
@@ -1074,8 +1098,29 @@ body {
     margin: 0 5% 0 5%;  
     background-color: #fff;
 }
+.container-menu {
+        display: flex;
+        align-items: center;
+        padding: 20px 10px 10px 10px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        top: 0;
+        text-transform: uppercase;
 }
+}
+
+
+
+
+
 @media (max-width: 678px) {
+
+  .cards-index {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 30px 0 30px;
+        gap: 20px;
+    }
 
    .container-contato-pg {
      display: flex;
@@ -1100,5 +1145,17 @@ body {
     border: 1px solid #9B0305;
     padding: 3px;
   }
+   .cards-index {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 20px 0 20px;
+        gap: 1px;
+    }
+.select-dealer {
+    display: none;
     
+}
+.container-conheca-mais {
+    margin: 15px 15px 15px 10%;
+}
 }
