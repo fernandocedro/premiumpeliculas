@@ -88,6 +88,12 @@ body {
     font-weight: 500;
 }
 
+.menu-mobile {
+    display: none;
+    font-size: 30px;
+    color: black;
+    cursor: pointer;
+}
 
 .linha {
     width: 100%;
@@ -781,4 +787,318 @@ body {
   color: #9B0305;
 
 
+}
+
+.dropdown {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.submenu a {
+    display: block;
+    padding: 10px 15px;
+    color: #000;
+    text-decoration: none;
+}
+
+.submenu a:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown:hover .submenu {
+    display: block;
+}
+
+/* menu hamburguer */
+.menu-lista {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #fff;
+  padding: 10px;
+  position: absolute;
+  top: 60px; /* ajuste conforme o layout */
+  right: 10px;
+  z-index: 999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.menu-lista.ativo {
+  display: flex;
+}
+
+.menu-mobile-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: right;
+}
+
+
+/* responsive styles */
+@media (max-width: 1326px) {
+  .cards-index {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 30px 0 30px;
+        gap: 20px;
+    }
+
+    .slide-content {
+    text-align: left;
+    font-size: 20px;
+    padding: 30px;
+    margin-left: 200px;
+    border-radius: 10px;
+}
+}
+
+
+@media (max-width: 1032px) {
+     .container-contato-pg {
+     display: flex;
+     flex-direction: column;
+     margin: 0 50% 0 15%;
+     background-color: #fff;
+}
+.container-contato-final-texto {
+    display: flex;
+    flex-direction: column;
+    margin: 100px 15% 40px 15%;
+    gap: 100px;
+}
+.mapa {
+    display: none;
+}
+  }
+
+
+
+@media (max-width: 1024px) {
+    .cards-index {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 0 0;
+        gap: 20px;
+    }
+    .slide-content {
+    text-align: left;
+    font-size: 20px;
+    padding: 30px;
+    margin-left: 100px;
+    border-radius: 10px;
+}
+}
+
+@media (max-width: 806px) {
+    .cards-index {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 0 0;
+        gap: 1px;
+    }
+    .card {
+    background-color: #5a5a5a;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1;
+    margin: 0 3px;
+    transition: transform 0.3s ease;
+    color: white;
+}
+}
+
+@media (max-width: 782px) {
+    .container-geral {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 0 0 0;
+    }
+    .menu {
+        display: none;
+        
+    }
+    .slide-content {
+        margin-left: 50px;
+        font-size: 18px;
+    }
+    .cards-index {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .menu-mobile {
+        display: inline;
+        font-size: 25px;
+    }
+    .pelicula-automotiva {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 5% 15% 5% 15%;
+    background-color: #fff;
+    gap: 20px;
+}
+.container-texto-final {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 15% 100px 15%;
+    background-color: #fff;
+    
+}
+.frase-orcamento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 25px;
+    padding: 30px 5% 30px 5%;
+    gap: 10px;
+    height: 300px;
+    background-color: #9B0305;
+    color: #fff;
+}
+.orcamento {
+    background-color: #fff;
+    color: #9B0305;
+    padding: 10px;
+    width: 100%;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid transparent;
+}
+}
+
+@media (max-width: 661px) {
+  .container-social {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    background-color: #9B0305;
+    gap: 13px;
+    justify-content: space-between;
+    padding: 0 1%;
+  }
+  .container-contato {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 1px;
+    width: none;
+    justify-content: center;
+    margin: 0 0 0 0;
+  }
+  .logo {
+    width: 40%;
+  }
+
+  .container-menu {
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    top: 0;
+    text-transform: uppercase;
+}
+  .email-contato {
+    display: flex;
+    flex-direction: row;
+    display: none;
+  }
+  .conheca-mais {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #a1a1a1;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18px;
+}
+.select-dealer {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+    margin-right: 0;
+    padding: 30px 0;
+}
+.container-conheca-mais {
+    margin: 0 15px 0 10%;
+}
+
+.footer-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10% 15% 10% 15%;
+    gap: 20px;
+}
+.container-quem-somos {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 5% 2% 5% 2%;
+    align-items: center;
+}
+.container-texto-quem-somos {
+    padding: 0 10px 0 10px;
+}
+.container-contato-pg {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5% 0 5%;  
+    background-color: #fff;
+}
+}
+@media (max-width: 678px) {
+
+   .container-contato-pg {
+     display: flex;
+     flex-direction: column;
+     margin: 0 50% 0 15%;
+     background-color: #fff;
+}
+.container-contato-final-texto {
+    display: flex;
+    flex-direction: column;
+    margin: 100px 15% 40px 15%;
+    gap: 100px;
+}
+}
+
+
+@media (max-width: 446px) {
+  #nome, #email, #mensagem {
+    width: 250px;
+    height: auto;
+    border-radius: 15px;
+    border: 1px solid #9B0305;
+    padding: 3px;
+  }
+    
 }

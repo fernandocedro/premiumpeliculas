@@ -13,7 +13,6 @@ var swiper = new Swiper(".mySwiper", {
   });
 
 var swiperClientes = new Swiper(".mySwiper-clientes", {
-  slidesPerView: 5,
   spaceBetween: 20,
   loop: true,
   autoplay: {
@@ -21,18 +20,38 @@ var swiperClientes = new Swiper(".mySwiper-clientes", {
     disableOnInteraction: false,
   },
   pagination: {
-    el: ".swiper-pagination-clientes", // classe única
+    el: ".swiper-pagination-clientes",
     clickable: true,
   },
+  breakpoints: {
+    0: {
+      slidesPerView: 1
+    },
+    768: {
+      slidesPerView: 3
+    },
+    1024: {
+      slidesPerView: 5 // vai usar o tamanho real de cada slide
+    }
+  }
 });
+
 
 // Swiper para depoimentos/testemunhos
 var swiperTestemunhal = new Swiper(".ltestemunhal", {
-  slidesPerView: 3,
-  spaceBetween: 30,
   loop: true,
-  
- 
+  spaceBetween: 30,
+  breakpoints: {
+    0: {
+      slidesPerView: 1
+    },
+    768: {
+      slidesPerView: 2
+    },
+    1024: {
+      slidesPerView: 3
+    }
+  }
 });
 
 document.getElementById("logo").addEventListener("click", function() {
@@ -67,3 +86,10 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
+  //menu hamburguer
+
+  function hamburguerMenu() {
+    const menu =  document.getElementById("menu");
+    menu.classList.toggle("ativo");
+  }
