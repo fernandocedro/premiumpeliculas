@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Imagens</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ícones de fonte -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl mx-auto">
+        
+        <!-- Tela de Login -->
+        <div id="login-screen" class="space-y-6">
+            <h1 class="text-3xl font-bold text-center text-gray-800">Login Admin</h1>
+            <p class="text-center text-gray-600">Por favor, insira seu e-mail e senha para acessar o painel de administração.</p>
+            <form id="login-form" class="space-y-4">
+                <input type="email" id="admin-email-login" placeholder="E-mail" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                <input type="password" id="admin-password-login" placeholder="Senha" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                <button type="submit" id="login-btn" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    Entrar
+                </button>
+            </form>
+        </div>
+
+        <!-- Conteúdo Principal, sempre visível -->
+        <div id="main-content" class="space-y-6 hidden">
+
+            <!-- Painel de Administração (Visível apenas após o login) -->
+            <div id="admin-panel" class="hidden space-y-6 mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h1 class="text-3xl font-bold text-gray-800">Painel Admin</h1>
+                    <button id="logout-btn" class="text-red-600 font-bold hover:text-red-800 transition-colors">Sair</button>
+                </div>
+                <p id="user-info" class="text-sm text-gray-600 mb-4"></p>
+
+                <!-- Formulário para Criação de Novo Usuário (Apenas para o Admin) -->
+                <hr class="my-6">
+                <h2 class="text-2xl font-bold text-center text-gray-800">Criar Novo Usuário Admin</h2>
+                <p class="text-center text-gray-600">Use esta opção para criar um novo usuário com privilégios de administrador.</p>
+                <form id="create-user-form" class="space-y-4">
+                    <input type="email" id="admin-email-create" placeholder="E-mail" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    <input type="password" id="admin-password-create" placeholder="Senha (mínimo 6 caracteres)" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    <button type="submit" id="create-user-btn" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        Criar Usuário
+                    </button>
+                </form>
+                
+                <!-- Formulário para adicionar a imagem à galeria (dentro do painel de admin) -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-inner mt-6">
+                    <h2 class="text-xl font-semibold mb-4">Adicionar Imagem à Galeria</h2>
+                    <p class="text-sm text-gray-600 mb-4">Cole a URL da imagem aqui para salvá-la na galeria do seu projeto. Você pode usar uma URL de qualquer servidor de imagens gratuito (como Imgur ou Google Drive).</p>
+                    <form id="add-to-gallery-form" class="space-y-4">
+                        <input type="text" id="image-url-gallery" placeholder="URL da Imagem" class="w-full px-4 py-2 border rounded-lg" required>
+                        <input type="text" id="image-desc" placeholder="Descrição da Imagem" class="w-full px-4 py-2 border rounded-lg" required>
+                        <select id="image-category" class="w-full px-4 py-2 border rounded-lg">
+                            <option value="automotiva">Película Automotiva</option>
+                            <option value="residencial">Película Residencial</option>
+                        </select>
+                        <button type="submit" id="add-to-gallery-btn" class="w-full bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700 transition-colors">
+                            Adicionar Imagem
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+            
+            <!-- Galeria de Imagens (Pública, sempre visível) -->
+            <div>
+                <h2 class="text-xl font-semibold mb-4 text-center">Imagens Adicionadas</h2>
+                <div id="image-gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    <!-- As imagens serão inseridas aqui via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para mensagens -->
+    <div id="message-modal" class="modal">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm mx-4 text-center relative">
+            <h3 id="message-title" class="text-xl font-bold mb-4"></h3>
+            <p id="message-body" class="text-gray-700"></p>
+            <div id="modal-url-container" class="mt-4 hidden">
+                <input type="text" id="modal-url-input" readonly class="w-full p-2 border rounded-lg text-sm text-gray-600">
+                <button id="copy-url-btn" class="mt-2 w-full bg-blue-600 text-white font-bold py-2 rounded-lg hover:bg-blue-700 transition-colors">Copiar URL</button>
+            </div>
+            <button id="modal-ok-btn" class="mt-6 px-6 py-2 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 transition-colors">OK</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getFirestore, collection, onSnapshot, doc, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+
+
+
+// Configuração do Firebase /////////////////////////////////////////////
+const localFirebaseConfig = {
+    apiKey: "AIzaSyD3X9dHV-vyAFP_57cbKE7f2aQZ8c1EwWs",
+    authDomain: "premiumpeliculas-d89eb.firebaseapp.com",
+    projectId: "premiumpeliculas-d89eb",
+    storageBucket: "premiumpeliculas-d89eb.firebasestorage.app",
+    messagingSenderId: "665913721148",
+    appId: "1:665913721148:web:bb17b9c6ad5fee4c609e39"
+};
+const localAppId = "admin-image-uploader";
+const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : localFirebaseConfig;
+const appId = typeof __app_id !== 'undefined' ? __app_id : localAppId;
+
+console.log('Firebase App ID:', appId);
+console.log('Firebase Config:', firebaseConfig);
+
+// Inicializa o Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+let userId = null;
+let isUserAdmin = false;
+let unsubscribeFromImages = null; // Variável para armazenar a função de desinscrição do listener
+
+// Elementos HTML
+const loginScreen = document.getElementById('login-screen');
+const mainContent = document.getElementById('main-content');
+const adminPanel = document.getElementById('admin-panel');
+const loginForm = document.getElementById('login-form');
+const adminEmailLoginInput = document.getElementById('admin-email-login');
+const adminPasswordLoginInput = document.getElementById('admin-password-login');
+const logoutBtn = document.getElementById('logout-btn');
+
+const addToGalleryForm = document.getElementById('add-to-gallery-form');
+const imageUrlGalleryInput = document.getElementById('image-url-gallery');
+const imageDescInput = document.getElementById('image-desc');
+const imageCategoryInput = document.getElementById('image-category');
+const addToGalleryBtn = document.getElementById('add-to-gallery-btn');
+
+const imageGallery = document.getElementById('image-gallery');
+const userInfo = document.getElementById('user-info');
+const createUserForm = document.getElementById('create-user-form');
+const adminEmailCreateInput = document.getElementById('admin-email-create');
+const adminPasswordCreateInput = document.getElementById('admin-password-create');
+const loginBtn = document.getElementById('login-btn');
+const createUserBtn = document.getElementById('create-user-btn');
+
+const messageModal = document.getElementById('message-modal');
+const messageTitle = document.getElementById('message-title');
+const messageBody = document.getElementById('message-body');
+const modalUrlContainer = document.getElementById('modal-url-container');
+const modalUrlInput = document.getElementById('modal-url-input');
+const copyUrlBtn = document.getElementById('copy-url-btn');
+const modalOkBtn = document.getElementById('modal-ok-btn');
+
+const showMessageModal = (title, message, url = null) => {
+    messageTitle.textContent = title;
+    messageBody.textContent = message;
+    if (url) {
+        modalUrlContainer.classList.remove('hidden');
+        modalUrlInput.value = url;
+        messageBody.classList.add('hidden');
+    } else {
+        modalUrlContainer.classList.add('hidden');
+        messageBody.classList.remove('hidden');
+    }
+    messageModal.style.display = 'flex';
+};
+
+const closeMessageModal = () => {
+    messageModal.style.display = 'none';
+};
+
+modalOkBtn.addEventListener('click', closeMessageModal);
+messageModal.addEventListener('click', (e) => {
+    if (e.target === messageModal) {
+        closeMessageModal();
+    }
+});
+
+copyUrlBtn.addEventListener('click', () => {
+    modalUrlInput.select();
+    document.execCommand('copy');
+    showMessageModal('URL Copiada!', 'A URL foi copiada para a área de transferência.');
+});
+
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    loginBtn.textContent = 'Entrando...';
+    loginBtn.disabled = true;
+
+    const email = adminEmailLoginInput.value;
+    const password = adminPasswordLoginInput.value;
+
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        showMessageModal('Sucesso', 'Login realizado com sucesso!');
+    } catch (error) {
+        console.error("Erro no login:", error);
+        showMessageModal('Erro', 'Falha na autenticação. Verifique seu e-mail e senha.');
+    } finally {
+        loginBtn.textContent = 'Entrar';
+        loginBtn.disabled = false;
+    }
+});
+
+logoutBtn.addEventListener('click', async () => {
+    try {
+        await signOut(auth);
+        showMessageModal('Sucesso', 'Você foi desconectado.');
+    } catch (error) {
+        console.error("Erro ao deslogar:", error);
+        showMessageModal('Erro', `Erro ao deslogar: ${error.message}`);
+    }
+});
+
+const renderImages = (images, isUserAdmin) => {
+    imageGallery.innerHTML = '';
+    images.forEach(image => {
+        const imageDiv = document.createElement('div');
+        imageDiv.className = 'relative group rounded-lg overflow-hidden shadow-lg';
+        imageDiv.innerHTML = `
+            <img src="${image.url}" alt="${image.desc}" class="w-full h-48 object-cover transition-transform duration-300 transform group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x300/F2F2F2/A1A1A1?text=Imagem+Nao+Encontrada';">
+            ${isUserAdmin ? `<button class="remove-btn absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-id="${image.id}"><i class="fas fa-trash"></i></button>` : ''}
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center">
+                <p class="text-sm font-semibold">${image.desc}</p>
+                <p class="text-xs text-gray-300">${image.category}</p>
+            </div>
+        `;
+        if (isUserAdmin) {
+            imageDiv.querySelector('.remove-btn').addEventListener('click', async (e) => {
+                const id = e.currentTarget.dataset.id;
+                try {
+                    await deleteDoc(doc(db, 'public', 'data', 'images' , id));
+                    showMessageModal('Sucesso', 'Imagem removida com sucesso!');
+                } catch (error) {
+                    console.error("Erro ao remover imagem:", error);
+                    showMessageModal('Erro', `Erro ao remover a imagem: ${error.message}`);
+                }
+            });
+        }
+        imageGallery.appendChild(imageDiv);
+    });
+};
+
+addToGalleryForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!isUserAdmin) {
+        showMessageModal('Erro de Permissão', 'Você precisa estar logado para adicionar imagens à galeria.');
+        return;
+    }
+
+    const url = imageUrlGalleryInput.value.trim();
+    const desc = imageDescInput.value;
+    const category = imageCategoryInput.value;
+
+    if (!url || !desc || !category) {
+        showMessageModal('Erro', 'Por favor, preencha todos os campos: URL, descrição e categoria.');
+        return;
+    }
+
+    addToGalleryBtn.textContent = 'Adicionando...';
+    addToGalleryBtn.disabled = true;
+
+    try {
+        await addDoc(collection(db, 'public', 'data', 'images'), {
+            url: url,
+            desc: desc,
+            category: category,
+            createdAt: new Date()
+        });
+        
+        imageUrlGalleryInput.value = '';
+        imageDescInput.value = '';
+        imageCategoryInput.value = 'automotiva';
+
+        showMessageModal('Sucesso', 'Imagem adicionada à galeria com sucesso!');
+
+    } catch (error) {
+        console.error("Erro ao adicionar imagem à galeria:", error);
+        showMessageModal('Erro', `Erro ao adicionar imagem: ${error.message}.`);
+    } finally {
+        addToGalleryBtn.textContent = 'Adicionar Imagem';
+        addToGalleryBtn.disabled = false;
+    }
+});
+
+createUserForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    createUserBtn.textContent = 'Criando...';
+    createUserBtn.disabled = true;
+
+    const email = adminEmailCreateInput.value;
+    const password = adminPasswordCreateInput.value;
+
+    try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        showMessageModal('Sucesso', 'Usuário admin criado com sucesso! Você já está logado.');
+        adminEmailCreateInput.value = '';
+        adminPasswordCreateInput.value = '';
+    } catch (error) {
+        console.error("Erro ao criar usuário:", error);
+        showMessageModal('Erro', `Erro ao criar usuário: ${error.message}`);
+    } finally {
+        createUserBtn.textContent = 'Criar Usuário';
+        createUserBtn.disabled = false;
+    }
+});
+
+const setupImageListener = () => {
+    // Se já existe um listener, removemos ele antes de criar um novo
+    if (unsubscribeFromImages) {
+        unsubscribeFromImages();
+    }
+    const imagesRef = collection(db, 'public', 'data', 'images');
+    unsubscribeFromImages = onSnapshot(imagesRef, (snapshot) => {
+        const images = [];
+        snapshot.forEach((doc) => {
+            images.push({ id: doc.id, ...doc.data() });
+        });
+        renderImages(images, isUserAdmin);
+    }, (error) => {
+        console.error("Erro ao carregar imagens:", error);
+    });
+};
+
+const init = async () => {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            userId = user.uid;
+            isUserAdmin = true;
+            loginScreen.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+            adminPanel.classList.remove('hidden');
+            userInfo.textContent = `Logado como: ${user.email} (ID: ${userId})`;
+            setupImageListener(); // Inicia o listener de imagens apenas quando logado
+        } else {
+            userId = null;
+            isUserAdmin = false;
+            loginScreen.classList.remove('hidden');
+            mainContent.classList.add('hidden');
+            adminPanel.classList.add('hidden');
+            imageGallery.innerHTML = ''; // Esvazia a galeria ao deslogar
+            if (unsubscribeFromImages) {
+                unsubscribeFromImages(); // Para o listener do Firestore
+                unsubscribeFromImages = null;
+            }
+        }
+    });
+};
+
+init();
+    </script>
+</body>
+</html>
