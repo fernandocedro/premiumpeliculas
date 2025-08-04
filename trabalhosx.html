@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Imagens</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Ícones de fonte -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         body {
@@ -28,76 +26,79 @@
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
+<body class="bg-gray-100">
 
-    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl mx-auto">
-        
-        <!-- Tela de Login -->
-        <div id="login-screen" class="space-y-6">
+    <div class="container mx-auto p-4 md:p-8">
+
+        <div id="login-screen" class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md mx-auto space-y-6">
             <h1 class="text-3xl font-bold text-center text-gray-800">Login Admin</h1>
             <p class="text-center text-gray-600">Por favor, insira seu e-mail e senha para acessar o painel de administração.</p>
             <form id="login-form" class="space-y-4">
                 <input type="email" id="admin-email-login" placeholder="E-mail" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 <input type="password" id="admin-password-login" placeholder="Senha" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                <button type="submit" id="login-btn" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                <button type="submit" id="login-btn" class="w-full bg-[#9B0305] text-white font-bold py-3 rounded-lg hover:bg-[#7A0205] transition-colors">
                     Entrar
                 </button>
             </form>
         </div>
 
-        <!-- Conteúdo Principal, sempre visível -->
-        <div id="main-content" class="space-y-6 hidden">
+        <div id="main-content" class="hidden">
+            <div id="admin-panel" class="hidden bg-white p-8 rounded-xl shadow-2xl w-full max-w-4xl mx-auto space-y-6">
 
-            <!-- Painel de Administração (Visível apenas após o login) -->
-            <div id="admin-panel" class="hidden space-y-6 mb-8">
                 <div class="flex justify-between items-center mb-4">
                     <h1 class="text-3xl font-bold text-gray-800">Painel Admin</h1>
                     <button id="logout-btn" class="text-red-600 font-bold hover:text-red-800 transition-colors">Sair</button>
                 </div>
                 <p id="user-info" class="text-sm text-gray-600 mb-4"></p>
 
-                <!-- Formulário para Criação de Novo Usuário (Apenas para o Admin) -->
-                <hr class="my-6">
-                <h2 class="text-2xl font-bold text-center text-gray-800">Criar Novo Usuário Admin</h2>
-                <p class="text-center text-gray-600">Use esta opção para criar um novo usuário com privilégios de administrador.</p>
-                <form id="create-user-form" class="space-y-4">
-                    <input type="email" id="admin-email-create" placeholder="E-mail" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
-                    <input type="password" id="admin-password-create" placeholder="Senha (mínimo 6 caracteres)" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
-                    <button type="submit" id="create-user-btn" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-colors">
-                        Criar Usuário
+                <div class="flex space-x-4 mb-6">
+                    <button id="show-add-image-btn" class="w-1/2 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold transition-colors hover:bg-blue-700">
+                        Adicionar Imagens
                     </button>
-                </form>
-                
-                <!-- Formulário para adicionar a imagem à galeria (dentro do painel de admin) -->
-                <div class="bg-gray-100 p-6 rounded-lg shadow-inner mt-6">
-                    <h2 class="text-xl font-semibold mb-4">Adicionar Imagem à Galeria</h2>
-                    <p class="text-sm text-gray-600 mb-4">Cole a URL da imagem aqui para salvá-la na galeria do seu projeto. Você pode usar uma URL de qualquer servidor de imagens gratuito (como Imgur ou Google Drive).</p>
-                    <form id="add-to-gallery-form" class="space-y-4">
-                        <input type="text" id="image-url-gallery" placeholder="URL da Imagem" class="w-full px-4 py-2 border rounded-lg" required>
-                        <input type="text" id="image-desc" placeholder="Descrição da Imagem" class="w-full px-4 py-2 border rounded-lg" required>
-                        <select id="image-category" class="w-full px-4 py-2 border rounded-lg">
-                            <option value="automotiva">Película Automotiva</option>
-                            <option value="residencial">Película Residencial</option>
-                        </select>
-                        <button type="submit" id="add-to-gallery-btn" class="w-full bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700 transition-colors">
-                            Adicionar Imagem
-                        </button>
-                    </form>
+                    <button id="show-add-user-btn" class="w-1/2 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg font-semibold transition-colors hover:bg-gray-400">
+                        Adicionar Usuário
+                    </button>
                 </div>
 
-            </div>
-            
-            <!-- Galeria de Imagens (Pública, sempre visível) -->
-            <div>
-                <h2 class="text-xl font-semibold mb-4 text-center">Imagens Adicionadas</h2>
-                <div id="image-gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                    <!-- As imagens serão inseridas aqui via JavaScript -->
+                <div id="add-images-section">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-inner mt-6">
+                        <h2 class="text-xl font-semibold mb-4">Adicionar Imagem à Galeria</h2>
+                        <p class="text-sm text-gray-600 mb-4">Cole a URL da imagem aqui para salvá-la na galeria do seu projeto.</p>
+                        <form id="add-to-gallery-form" class="space-y-4">
+                            <input type="text" id="image-url-gallery" placeholder="URL da Imagem" class="w-full px-4 py-2 border rounded-lg" required>
+                            <input type="text" id="image-desc" placeholder="Descrição da Imagem" class="w-full px-4 py-2 border rounded-lg" required>
+                            <select id="image-category" class="w-full px-4 py-2 border rounded-lg">
+                                <option value="automotiva">Película Automotiva</option>
+                                <option value="residencial">Película Residencial</option>
+                            </select>
+                            <button type="submit" id="add-to-gallery-btn" class="w-full bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                Adicionar Imagem
+                            </button>
+                        </form>
+                    </div>
+
+                    <h2 class="text-2xl font-semibold mb-4 mt-8 text-center">Imagens Adicionadas</h2>
+                    <div id="image-gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        </div>
+                </div>
+
+                <div id="add-users-section" style="display: none;">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-inner mt-6">
+                        <h2 class="text-2xl font-bold text-center text-gray-800">Criar Novo Usuário Admin</h2>
+                        <p class="text-center text-gray-600 mb-4">Use esta opção para criar um novo usuário com privilégios de administrador.</p>
+                        <form id="create-user-form" class="space-y-4">
+                            <input type="email" id="admin-email-create" placeholder="E-mail" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                            <input type="password" id="admin-password-create" placeholder="Senha (mínimo 6 caracteres)" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                            <button type="submit" id="create-user-btn" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-colors">
+                                Criar Usuário
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal para mensagens -->
     <div id="message-modal" class="modal">
         <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm mx-4 text-center relative">
             <h3 id="message-title" class="text-xl font-bold mb-4"></h3>
@@ -110,14 +111,10 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getFirestore, collection, onSnapshot, doc, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-
-
 
 // Configuração do Firebase /////////////////////////////////////////////
 const localFirebaseConfig = {
@@ -144,7 +141,7 @@ const auth = getAuth(app);
 
 let userId = null;
 let isUserAdmin = false;
-let unsubscribeFromImages = null; // Variável para armazenar a função de desinscrição do listener
+let unsubscribeFromImages = null; 
 
 // Elementos HTML
 const loginScreen = document.getElementById('login-screen');
@@ -154,6 +151,13 @@ const loginForm = document.getElementById('login-form');
 const adminEmailLoginInput = document.getElementById('admin-email-login');
 const adminPasswordLoginInput = document.getElementById('admin-password-login');
 const logoutBtn = document.getElementById('logout-btn');
+
+// Elementos do novo menu
+const showAddImageBtn = document.getElementById('show-add-image-btn');
+const showAddUserBtn = document.getElementById('show-add-user-btn');
+const addImagesSection = document.getElementById('add-images-section');
+const addUsersSection = document.getElementById('add-users-section');
+
 
 const addToGalleryForm = document.getElementById('add-to-gallery-form');
 const imageUrlGalleryInput = document.getElementById('image-url-gallery');
@@ -333,7 +337,6 @@ createUserForm.addEventListener('submit', async (e) => {
 });
 
 const setupImageListener = () => {
-    // Se já existe um listener, removemos ele antes de criar um novo
     if (unsubscribeFromImages) {
         unsubscribeFromImages();
     }
@@ -349,6 +352,26 @@ const setupImageListener = () => {
     });
 };
 
+// Event Listeners para o menu
+showAddImageBtn.addEventListener('click', () => {
+    addImagesSection.style.display = 'block';
+    addUsersSection.style.display = 'none';
+    showAddImageBtn.classList.replace('bg-gray-300', 'bg-blue-600');
+    showAddImageBtn.classList.replace('text-gray-800', 'text-white');
+    showAddUserBtn.classList.replace('bg-blue-600', 'bg-gray-300');
+    showAddUserBtn.classList.replace('text-white', 'text-gray-800');
+});
+
+showAddUserBtn.addEventListener('click', () => {
+    addImagesSection.style.display = 'none';
+    addUsersSection.style.display = 'block';
+    showAddImageBtn.classList.replace('bg-blue-600', 'bg-gray-300');
+    showAddImageBtn.classList.replace('text-white', 'text-gray-800');
+    showAddUserBtn.classList.replace('bg-gray-300', 'bg-blue-600');
+    showAddUserBtn.classList.replace('text-gray-800', 'text-white');
+});
+
+
 const init = async () => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -358,16 +381,16 @@ const init = async () => {
             mainContent.classList.remove('hidden');
             adminPanel.classList.remove('hidden');
             userInfo.textContent = `Logado como: ${user.email} (ID: ${userId})`;
-            setupImageListener(); // Inicia o listener de imagens apenas quando logado
+            setupImageListener(); 
         } else {
             userId = null;
             isUserAdmin = false;
             loginScreen.classList.remove('hidden');
             mainContent.classList.add('hidden');
             adminPanel.classList.add('hidden');
-            imageGallery.innerHTML = ''; // Esvazia a galeria ao deslogar
+            imageGallery.innerHTML = '';
             if (unsubscribeFromImages) {
-                unsubscribeFromImages(); // Para o listener do Firestore
+                unsubscribeFromImages();
                 unsubscribeFromImages = null;
             }
         }
