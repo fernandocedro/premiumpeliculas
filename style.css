@@ -684,7 +684,7 @@ body {
 
 .pelicula-automotiva-trabalhos {
     display: flex;
-    padding: 5% 0 0 20%;
+    padding: 5% 0 0 4%;
     background-color: #fff;
     gap: 20px;
 }
