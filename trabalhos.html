@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="png" href="img/icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css">
     <title>Premium peliculas</title>
 </head>
@@ -54,67 +53,26 @@
             <span class="breadcrumb-current">Trabalhos</span>
     </div>
 
-    <div class="pelicula-automotiva-trabalhos">
-        <h2>Película automotiva</h2>
-    </div>
-    <div class="galeria">
-        <img src="img/IMG_0240.webp" alt="Descrição 1" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_0287.webp" alt="Descrição 2" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_1108.webp" alt="Descrição 3" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_1125.webp" alt="Descrição 4" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_1742.webp" alt="Descrição 5" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_1748.webp" alt="Descrição 6" data-desc="Aplicação de película automotiva.">
-    </div>
-    <div class="galeria">
-        <img src="img/IMG_17921.webp" alt="Descrição 8" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_1801.webp" alt="Descrição 9" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_1852.webp" alt="Descrição 10" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_1878.webp" alt="Descrição 11" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_2023.webp" alt="Descrição 12" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_2132.webp" alt="Descrição 13" data-desc="Aplicação de película automotiva.">
-    </div>
-    <div class="galeria">
-        <img src="img/IMG_2163.webp" alt="Descrição 8" data-desc="Aplicação de película automotiva.">
-        <img src="img/IMG_21661.webp" alt="Descrição 9" data-desc="Aplicação de película automotiva.">
-    </div>
-    
-
-
-    <div class="pelicula-automotiva-trabalhos">
-        <h2>Película residencial</h2>
-    </div>
-    <div class="galeria">
-        
-        <img src="img/IMG_0184.webp" alt="Descrição 1" data-desc="Película residencial">
-        <img src="img/IMG_0607.webp" alt="Descrição 2" data-desc="Película residencial">
-        <img src="img/IMG_0615.webp" alt="Descrição 3" data-desc="Película residencial">
-        <img src="img/IMG_0646.webp" alt="Descrição 4" data-desc="Película residencial">
-        <img src="img/IMG_1263.webp" alt="Descrição 5" data-desc="Película residencial">
-        <img src="img/IMG_1276.webp" alt="Descrição 6" data-desc="Película residencial">
-    </div>
-    <div class="galeria">
-        <img src="img/IMG_1333.webp" alt="Descrição 8" data-desc="Película residencial">
-        <img src="img/IMG_2053.webp" alt="Descrição 9" data-desc="Película residencial">
-        <img src="img/IMG_3931.webp" alt="Descrição 11" data-desc="Película residencial">
-        <img src="img/ult01.webp" alt="Descrição 13" data-desc="Película residencial">
-        <img src="img/ult02.webp" alt="Descrição 8" data-desc="Película residencial">
-        <img src="img/ult03.webp" alt="Descrição 9" data-desc="Película residencial">
-    </div>
-    
-
-<!-- Popup -->
-    <div class="popup" id="popup">
-        <span class="fechar" id="fechar">&times;</span>
-        <img id="imagemPopup" src="" alt="">
-        <p id="descricaoPopup"></p>
+<div class="pelicula-automotiva-trabalhos">
+    <h2>Película automotiva</h2>
+</div>
+<div id="galeria-automotiva-dinamica" class="galeria">
     </div>
 
+<div class="pelicula-automotiva-trabalhos">
+    <h2>Película residencial</h2>
+</div>
+<div id="galeria-residencial-dinamica" class="galeria">
+    </div>
 
+<!-- Popup com botões de navegação -->
+<div class="popup" id="popup">
+    <span class="fechar" id="fechar">&times;</span>
+    <img id="imagemPopup" src="" alt="">
+    <p id="descricaoPopup"></p>
+</div>
 
-
-    
-   
- <section class="footer-menu">
+<section class="footer-menu">
     <div class="container-footer-menu">
         <p><strong> MENU </strong></p>
         <hr>
@@ -150,8 +108,150 @@
             <span>Premium Películas &copy; 2025 - Desenvolvido por <a href="https://www.fernandocedro.com.br" class="autor" target="_blank">Fernando Cedro</a> </span>
         </div> 
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="script.js"></script>
+    
+    
+
+   <!-- SDKs do Firebase e script de galeria -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyD3X9dHV-vyAFP_57cbKE7f2aQZ8c1EwWs",
+    authDomain: "premiumpeliculas-d89eb.firebaseapp.com",
+    projectId: "premiumpeliculas-d89eb",
+    storageBucket: "premiumpeliculas-d89eb.firebasestorage.app",
+    messagingSenderId: "665913721148",
+    appId: "1:665913721148:web:bb17b9c6ad5fee4c609e39",
+    measurementId: "G-JV5481PEYE"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const analytics = getAnalytics(app);
+
+const hamburguerMenu = () => {
+    const menuMobile = document.getElementById('menu-mobile-list');
+    if (menuMobile.style.display === 'flex') {
+        menuMobile.style.display = 'none';
+    } else {
+        menuMobile.style.display = 'flex';
+    }
+};
+
+const galeriaAutomotivaDinâmica = document.getElementById('galeria-automotiva-dinamica');
+const galeriaResidencialDinâmica = document.getElementById('galeria-residencial-dinamica');
+const popup = document.getElementById('popup');
+const imagemPopup = document.getElementById('imagemPopup');
+const descricaoPopup = document.getElementById('descricaoPopup');
+const fecharBtn = document.getElementById('fechar');
+
+// Removidas as referências aos botões de navegação
+let allImages = [];
+let currentIndex = -1;
+
+const updateAllImages = () => {
+    allImages = Array.from(document.querySelectorAll('#galeria-automotiva-dinamica img, #galeria-residencial-dinamica img'));
+};
+
+
+const updatePopupContent = (index) => {
+    if (allImages.length === 0) return;
+    const image = allImages[index];
+    imagemPopup.src = image.src;
+    descricaoPopup.textContent = image.dataset.desc || '';
+    currentIndex = index;
+};
+
+[galeriaAutomotivaDinâmica, galeriaResidencialDinâmica].forEach(gallery => {
+    gallery.addEventListener('click', (event) => {
+        if (event.target.tagName === 'IMG') {
+            const clickedImage = event.target;
+            const index = allImages.findIndex(img => img === clickedImage);
+            if (index !== -1) {
+                updatePopupContent(index);
+                popup.classList.add('visible');
+            }
+        }
+    });
+});
+
+fecharBtn.addEventListener('click', () => {
+    popup.classList.remove('visible');
+});
+
+// Removida a lógica de navegação para os botões "próximo" e "anterior"
+
+popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+        popup.classList.remove('visible');
+    }
+});
+
+const renderGallery = (images) => {
+    galeriaAutomotivaDinâmica.innerHTML = '';
+    galeriaResidencialDinâmica.innerHTML = '';
+
+    images.forEach(image => {
+        const category = (image.category || '').toLowerCase();
+        const url = image.url;
+        const desc = image.desc || '';
+
+        if (!url || !category) {
+            console.warn("Imagem ignorada por falta de dados válidos:", image);
+            return;
+        }
+
+        const imgElement = document.createElement('img');
+        imgElement.src = url;
+        imgElement.alt = desc;
+        imgElement.dataset.desc = desc;
+
+        if (category === 'automotiva') {
+            galeriaAutomotivaDinâmica.appendChild(imgElement);
+        } else if (category === 'residencial') {
+            galeriaResidencialDinâmica.appendChild(imgElement);
+        } else {
+            console.warn("Categoria desconhecida:", category);
+        }
+    });
+    
+    updateAllImages();
+};
+
+const init = async () => {
+    console.log("Script carregado e executado.");
+    try {
+        await signInAnonymously(auth);
+
+        const imagesRef = collection(db, 'public', 'data', 'images');
+
+        onSnapshot(imagesRef, (snapshot) => {
+            const images = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                if (data && typeof data === 'object') {
+                    images.push({ id: doc.id, ...data });
+                }
+            });
+
+            console.log("Total de imagens recebidas do Firestore:", images.length);
+            renderGallery(images);
+        }, (error) => {
+            console.error("Erro ao carregar imagens:", error);
+        });
+    } catch (error) {
+        console.error("Erro na inicialização do Firebase:", error);
+    }
+};
+
+init();
+
+</script>
+
     
 </body>
 </html>

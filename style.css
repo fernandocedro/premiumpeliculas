@@ -140,6 +140,37 @@ body {
 
 }
 
+ /* Estilo para as setas de navegação */
+.navegacao {
+    cursor: pointer;
+    position: absolute; /* ESSENCIAL */
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    user-select: none;
+    z-index: 1002; /* Garante que a seta fique na frente */
+    background-color: rgba(0, 0, 0, 0.5); /* Adicionei um fundo para facilitar a visualização */
+}
+
+/* Posição da seta da direita */
+#proxima {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* Posição da seta da esquerda */
+#anterior {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+
+
 .swiper-pagination,
 .swiper-button-next,
 .swiper-button-prev {
@@ -569,43 +600,87 @@ body {
   transform: scale(1.03);
 }
 
+/* CSS para o popup do carrossel */
 .popup {
-  display: none; /* escondido por padrão */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 999;
-  padding: 20px;
-  text-align: center;
+    display: none; /* Esconde o popup por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+    opacity: 0;
 }
 
-.popup img {
-  max-width: 90%;
-  max-height: 80vh;
-  border-radius: 10px;
+/* Classe para mostrar o popup */
+.popup.visible {
+    display: flex;
+    opacity: 1;
 }
 
-.popup p {
-  color: #fff;
-  margin-top: 15px;
-  font-size: 1.1em;
+/* Estilo para a imagem no popup */
+#imagemPopup {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
 }
 
+/* Estilo para a descrição no popup */
+#descricaoPopup {
+    position: absolute;
+    bottom: 5%;
+    color: white;
+    text-align: center;
+    width: 100%;
+    z-index: 1001;
+}
+
+/* Estilo para o botão de fechar */
 .fechar {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 40px;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1002;
 }
+
+/* Estilo para as setas de navegação */
+.navegacao {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    user-select: none;
+    z-index: 1002;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+/* Posição da seta da direita */
+#proxima {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* Posição da seta da esquerda */
+#anterior {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+
 
 .pelicula-automotiva-trabalhos {
     display: flex;
