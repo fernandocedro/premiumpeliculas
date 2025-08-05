@@ -262,14 +262,16 @@ body {
     margin-bottom: 20px;
   }
 
-.nossos-serviços {
+.nossos-servicos {
     display: flex;
-    margin: 0% 20% 0 20%;
+    margin: 0 20% 0 20%;
     color: #9B0305;
+    justify-content: center;
+    gap: 5px;
   }
 
 .imagem-servico {
-  width: 95%;
+  width: 100%;
   transition: transform 0.3s ease;
 }
 
